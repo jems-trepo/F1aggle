@@ -1,0 +1,5 @@
+# Data model, API, scoring
+**Tables** (migrations, UUIDs, created_at, FKs, indexes): users, teams, submissions(version, artifact URI, hash, status, validation report), tracks, seasons, races, race_entries(pinned submission, setup), qualifying_results, race_results, lap_times, ratings, points, replays(URI, hash, sim version), audit_log, bans. Document in /docs/DATA_MODEL.md.
+**API** REST under /v1, OpenAPI: auth; POST /submissions; GET /submissions/{id}; GET /races; GET /races/{id}; POST /races/{id}/enter; GET /races/{id}/results; GET /leaderboard; GET /replays/{id}; admin (create/cancel race, ban, quarantine); WS /v1/stream/{race_id}. Consistent errors, pagination, idempotency keys, per-endpoint rate limits.
+**Scoring**: F1 points 25-18-15-12-10-8-6-4-2-1 (+ optional fastest lap). Skill rating (Elo/Glicko/TrueSkill), divisions (beginner/intermediate/open).
+**Anti-cheat**: copy detection (hash + behavioural similarity), collusion rules, multi-account signals, admin review tools, downloadable replays verifiable with open-source sim.
